@@ -1,3 +1,6 @@
+/*
+	infiSTAR: when you die your weapons dropped are not next to your body anymore, they will be on your body again!
+*/
 closeDialog 0;
 ExileClientLastDiedPlayerObject = player;
 ExileClientIsAutoRunning = false;
