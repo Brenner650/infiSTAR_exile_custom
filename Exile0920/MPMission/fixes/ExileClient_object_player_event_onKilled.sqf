@@ -12,20 +12,25 @@ if !((vehicle player) isEqualTo player) then
 };
 ('ExileClientHUDLayer' call BIS_fnc_rscLayer) cutText ['', 'PLAIN'];
 
-player spawn {
+ExileClientLastDiedPlayerObject spawn {
 	private['_unit','_nObject'];
 	_unit = _this;
+	if(isNil'_unit')exitWith{};
+	if(isNull _unit)exitWith{};
+	_pos = getPosATL _unit;
 	_nObject = objNull;
-	waitUntil {_nObject = nearestObject [_unit, 'WeaponHolderSimulated'];!isNull _nObject};
+	waitUntil {_nObject = nearestObject [_pos, 'WeaponHolderSimulated'];!isNull _nObject};
 	if(!isNull _nObject)then
 	{
 		_weaponCargo = weaponCargo _nObject;
 		if!(_weaponCargo isEqualTo [])then
 		{
 			{
+				if(isNull _unit)exitWith{};
 				_unit addWeapon _x;
 			} forEach _weaponCargo;
 		};
 	};
+	if(isNull _unit)exitWith{};
 	deleteVehicle _nObject;
 };
