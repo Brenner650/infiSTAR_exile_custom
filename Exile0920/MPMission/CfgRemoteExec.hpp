@@ -1,3 +1,4 @@
+/*
 class CfgRemoteExec
 {
 	class Functions
@@ -13,3 +14,4 @@ class CfgRemoteExec
 		jip=0;
 	};
 };
+*/
