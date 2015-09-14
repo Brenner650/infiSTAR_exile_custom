@@ -88,7 +88,7 @@ else
 		case "NVGoggles", 
 		case "Glasses": 
 		{
-			_player linkItemGlobal _itemClassName;
+			_player linkItem _itemClassName;
 			_added = true;
 		};
 		case "Headgear": 	{ _player addHeadgear _itemClassName; _added = true; }; 

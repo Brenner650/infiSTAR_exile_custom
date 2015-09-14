@@ -23,7 +23,7 @@ _bambiPlayer = _group createUnit ["Exile_Unit_Player", [0,0,0], [], 0, "CAN_COLL
 		case 1: 	{ _bambiPlayer addMagazineGlobal _x; };
 		case 2: 	{ _bambiPlayer addWeaponGlobal _x; };
 		case 3: 	{ _bambiPlayer addWeaponGlobal _x; };
-		case 4:		{ _bambiPlayer linkItemGlobal _x; };
+		case 4:		{ _bambiPlayer linkItem _x; };
 		default 					{ _bambiPlayer addItemGlobal _x; };
 	};
 } forEach getArray(configFile >> "CfgSettings" >> "BambiSettings" >> "loadOut");
