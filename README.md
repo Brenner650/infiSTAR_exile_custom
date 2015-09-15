@@ -1,4 +1,4 @@
-infiSTAR.de Exile custom changes
+[infiSTAR.de](http://www.infiSTAR.de) Exile custom changes
 =============
 mainly for testing purpose (testing with my friends at http://www.mgtrolls.eu/)
 
