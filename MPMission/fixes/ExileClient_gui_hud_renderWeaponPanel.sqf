@@ -1,21 +1,12 @@
-/**
- * Exile Mod
- * www.exilemod.com
- * © 2015 Exile Mod Team
- *
- * This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. 
- * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/.
- */
+/*
+	infiSTAR: Fixed need reload & fixed Vehicle Ammo/Magazines shown
+*/
 
-
-NEED_RELOAD = {
-	_cmd = currentMagazineDetail _this;
-	_arr = _cmd splitString "([ ]/:)";
-	_maxAmmo = _arr select 4;
+NEED_RELOAD_INFISTAR = {
+	_maxAmmo = getNumber (configFile >> 'CfgMagazines' >> _currentMagazineClassName >> 'count');
 	if(_maxAmmo == 0)exitWith{0};
-	_currentAmmo = _arr select 3;
-	if(_currentAmmo == 0)exitWith{1};
-	_maxAmmo / _currentAmmo
+	if(_currentAmmoCount isEqualTo 0)exitWith{1};
+	1 - _currentAmmoCount / _maxAmmo
 };
 
 private["_display","_weaponPanelControl","_weaponPanelType","_currentTurretPath","_vehicle","_vehicleRole","_currentZeroing","_currentWeaponState","_currentWeaponClassName","_currentMuzzle","_currentFireMode","_currentMagazineClassName","_currentAmmoCount","_currentMagazineCount","_needReload","_compatibleMagazines","_ammoColor","_ammoControl","_magazineControl","_zeroingControl","_fireModeControl","_muzzleDisplayName","_muzzleControl"];
@@ -23,14 +14,14 @@ disableSerialization;
 _display = uiNamespace getVariable "RscExileHUD";
 _weaponPanelControl = _display displayCtrl 1100;
 _weaponPanelType = 0;
-_currentTurretPath = -1;
+_currentTurretPath = [-1];
 _vehicle = vehicle player;
 if !(_vehicle isEqualTo player) then
 {
 	if !(_vehicle isKindOf "ParachuteBase") then 
 	{
 		_vehicleRole = assignedVehicleRole player;
-		switch (toLower (_vehicleRole select 0)) do
+		switch (_vehicleRole select 0) do
 		{
 			case "driver": 
 			{
@@ -42,14 +33,14 @@ if !(_vehicle isEqualTo player) then
 				{
 					if !((currentWeapon player) isEqualTo "") then 
 					{
-							_weaponPanelType = 1;
+						_weaponPanelType = 1;
 					};
 				};
 			};
-			case "turret": 
+			case "Turret": 
 			{	
 				_weaponPanelType = 2; 
-				_currentTurretPath = (_vehicleRole select 1) select 0;
+				_currentTurretPath = _vehicleRole select 1;
 			};
 		};
 	};
@@ -58,7 +49,7 @@ else
 {
 	if !((currentWeapon player) isEqualTo "") then 
 	{
-			_weaponPanelType = 1; 
+		_weaponPanelType = 1; 
 		if ((binocular player) isEqualTo (currentWeapon player)) then
 		{
 			_weaponPanelType = 0;
@@ -87,14 +78,21 @@ else
 		case 2:
 		{
 			_currentZeroing = currentZeroing player;
-			_currentWeaponState = weaponState [_vehicle, [_currentTurretPath]];
+			_currentWeaponState = weaponState [_vehicle, _currentTurretPath];
 			_currentWeaponClassName = _currentWeaponState select 0;
 			_currentMuzzle = _currentWeaponState select 1;
 			_currentFireMode = _currentWeaponState select 2;
 			_currentMagazineClassName = _currentWeaponState select 3;
 			_currentAmmoCount = _currentWeaponState select 4;
-			_currentMagazineCount = ((count (magazinesAmmoFull _vehicle)) - 1) max 0; 
-			_needReload = _vehicle call NEED_RELOAD;
+			
+			_turretMags = _vehicle magazinesTurret _currentTurretPath;
+			_currentMagazineCount = {
+				_mags = getArray (configFile >> 'CfgWeapons' >> _currentWeaponClassName >> 'magazines');
+				if(_x in _mags)then{_vehicle magazineTurretAmmo [_x, _currentTurretPath] > 0}else{false}
+			} count _turretMags;
+			_currentMagazineCount = (_currentMagazineCount - 1) max 0;
+			
+			_needReload = call NEED_RELOAD_INFISTAR;
 		};
 		case 1:
 		{
@@ -114,7 +112,9 @@ else
 			{
 				_compatibleMagazines = getArray (configFile >> "CfgWeapons" >> _currentWeaponClassName >> "magazines");
 			};
-			_needReload = player call NEED_RELOAD;
+			
+			_needReload = call NEED_RELOAD_INFISTAR;
+			
 			{
 				if (_x in _compatibleMagazines) then
 				{
