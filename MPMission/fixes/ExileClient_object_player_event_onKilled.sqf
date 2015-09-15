@@ -15,7 +15,7 @@ if !((vehicle player) isEqualTo player) then
 
 _code = {
 	private['_unit','_nObject','_pos','_weaponCargo'];
-	_unit = _this;
+	_unit = _this select 0;
 	if(isNil'_unit')exitWith{};
 	if(isNull _unit)exitWith{};
 	_pos = getPosATL _unit;
