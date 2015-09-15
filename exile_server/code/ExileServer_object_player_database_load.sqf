@@ -194,7 +194,7 @@ _assigned_items = _data select 19;
 if !(_assigned_items isEqualTo []) then
 {
 	{
-		_player linkItem _x;
+		_player linkItemGlobal _x;
 	}
 	forEach _assigned_items;
 };
