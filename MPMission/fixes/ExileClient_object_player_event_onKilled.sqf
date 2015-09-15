@@ -29,7 +29,7 @@ ExileClientLastDiedPlayerObject spawn {
 		{
 			{
 				if(isNull _unit)exitWith{};
-				_unit addWeaponGlobal _x;
+				_unit addWeapon _x;
 			} forEach _weaponCargo;
 		};
 	};
