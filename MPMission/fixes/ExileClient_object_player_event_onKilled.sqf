@@ -19,6 +19,7 @@ _code = {
 	if(isNil'_unit')exitWith{};
 	if(isNull _unit)exitWith{};
 	_pos = getPosATL _unit;
+	_nObject = nearestObject [_pos, 'WeaponHolderSimulated'];
 	if(!isNull _nObject)then
 	{
 		_weaponsItemsCargo = weaponsItemsCargo _nObject;
