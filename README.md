@@ -2,6 +2,11 @@
 =============
 mainly for testing purpose (testing with my friends at http://www.mgtrolls.eu/)
 
+Updates
+--------------------------
+- Added servermod to get rid of most of un-needed supply objects (will speed your server up very nicely) -servermod=@Exile_FPS;
+
+Bit info:
 --------------------------
 - MPMission has another readme.txt :)
 - You should disable:
