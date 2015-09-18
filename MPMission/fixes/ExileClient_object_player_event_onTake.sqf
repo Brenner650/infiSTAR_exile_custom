@@ -18,7 +18,7 @@ if!(_inuseby isEqualTo (netId player))then
 	if((alive _objthatabuses)&&(_objthatabuses distance _container < 10))exitWith
 	{
 		_itemTaken = false;
-		systemChat format['%1 is looting this item..',name (objectFromNetId _inuseby)];
+		systemChat format['<infiSTAR.de> ANTI-DUPE: %1 is looting this item already.',name (objectFromNetId _inuseby)];
 		
 		_unit action ['CancelAction', _unit];
 		if(_itemClassName in (backpack player))exitWith

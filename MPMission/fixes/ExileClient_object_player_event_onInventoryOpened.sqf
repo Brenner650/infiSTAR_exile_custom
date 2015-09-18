@@ -44,7 +44,7 @@ else
 			if((alive _objthatabuses)&&(_objthatabuses distance _container < 10))exitWith
 			{
 				_closeInventory = true;
-				systemChat format['%1 is looting this item..',name (objectFromNetId _inuseby)];
+				systemChat format['<infiSTAR.de> ANTI-DUPE: %1 is looting this item already.',name (objectFromNetId _inuseby)];
 			};
 		};
 		_cancelEvent = _closeInventory;

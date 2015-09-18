@@ -31,7 +31,7 @@ if!(_messageName in _whiteList)then
 	fnc_check_packets_QUEARRAY pushBack diag_tickTime;
 };
 if(_exit)exitWith{
-	_log = format['%1 has been blocked by ANTI-SPAM.',_messageName];
+	_log = format['<infiSTAR.de> ANTI-SPAM blocked [%1]',_messageName];
 	systemChat _log;
 };
 [ExileClientSessionId, _messageName, _messageParameters] remoteExecCall ['ExileServer_system_network_dispatchIncomingMessage', 2];
