@@ -8,5 +8,6 @@ class CfgExileCustomCode
 	ExileClient_object_player_event_onKilled = "fixes\ExileClient_object_player_event_onKilled.sqf";
 	ExileClient_object_player_event_onTake = "fixes\ExileClient_object_player_event_onTake.sqf";
 	ExileClient_object_player_initialize = "fixes\ExileClient_object_player_initialize.sqf";
+	ExileClient_system_network_send = "fixes\ExileClient_system_network_send.sqf";
 	ExileClient_util_world_getNearbyPlayers = "fixes\ExileClient_util_world_getNearbyPlayers.sqf";
 };
