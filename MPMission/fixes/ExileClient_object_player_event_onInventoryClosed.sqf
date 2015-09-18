@@ -1,32 +1,33 @@
-/**
- * Exile Mod
- * www.exilemod.com
- * © 2015 Exile Mod Team
- *
- * This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. 
- * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/.
- */
- 
-private['_container','_vehicle'];
+/*
+	infiSTAR.de: default onInventoryClosed uses not defined variables which causes a lot erroring...
+*/
+private["_unit","_container"];
+_unit = _this select 0;
 _container = _this select 1;
+
+_isWeaponHolder = (typeOf _container) in ["GroundWeaponHolder","WeaponHolderSimulated"];
+if(_isWeaponHolder)then
+{
+	_inuseby = _container getVariable ['HOLDER_IN_USE',''];
+	if(netId player == _inuseby)then
+	{
+		_container setVariable ['HOLDER_IN_USE',nil,true];
+	};
+};
+
 ExileClientInventoryOpened = false;
 ExileClientCurrentInventoryContainer = objNull;
 try
 {
-	if((typeOf _vehicle) in ['GroundWeaponHolder','WeaponHolderSimulated'])then
+	if(_isWeaponHolder)then
 	{
-		_inuseby = _vehicle getVariable ['HOLDER_IN_USE',''];
-		if(netId player == _inuseby)then
-		{
-			_vehicle setVariable ['HOLDER_IN_USE',nil,true];
-		};
-		throw '';
+		throw "";
 	};
-	if(_vehicle isKindOf 'Man')then
+	if((vehicle _unit) isKindOf "Man")then
 	{
-		throw '';
+		throw "";
 	};
-	['vehicleSaveRequest',[netId _container]] call ExileClient_system_network_send;
+	["vehicleSaveRequest",[netId _container]] call ExileClient_system_network_send;
 }
 catch
 {
