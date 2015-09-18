@@ -11,7 +11,7 @@ if(_isWeaponHolder)then
 	_inuseby = _container getVariable ['HOLDER_IN_USE',''];
 	if(netId player == _inuseby)then
 	{
-		_container setVariable ['HOLDER_IN_USE',nil,true];
+		_container setVariable ['HOLDER_IN_USE','',true];
 	};
 };
 
