@@ -9,9 +9,9 @@ _isWeaponHolder = (typeOf _container) in ["GroundWeaponHolder","WeaponHolderSimu
 if(_isWeaponHolder)then
 {
 	_inuseby = _container getVariable ['HOLDER_IN_USE',''];
-	if(netId player == _inuseby)then
+	if(netId player isEqualTo _inuseby)then
 	{
-		_container setVariable ['HOLDER_IN_USE','',true];
+		_container setVariable ['HOLDER_IN_USE','2:2',true];
 	};
 };
 
