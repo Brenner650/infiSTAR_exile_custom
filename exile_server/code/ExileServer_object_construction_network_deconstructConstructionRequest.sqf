@@ -24,7 +24,11 @@ if((getPlayerUID _playerObject) in _build_rights)then
 			_config = ("(getText(_x >> 'staticObject') isEqualTo _type)" configClasses (configFile >> "CfgConstruction")) select 0;
 			_config = getText (_config >> "kitMagazine");
 			_holder = createVehicle ["groundWeaponHolder", getPosATL _playerObject, [], 0, "CAN_COLLIDE"];
-			_holder addItemCargoGlobal [_config,1];
+			_holder addMagazineCargoGlobal [_config, 1];
+			if !((_object getVariable ["ExileAccessCode", -1]) isEqualTo -1) then
+			{
+				_holder addMagazineCargoGlobal ["Exile_Item_Codelock", 1];
+			};
 			[_sessionID,"notificationRequest",["Success",["Deconstructed"]]] call ExileServer_system_network_send_to;
 		};
 	};
