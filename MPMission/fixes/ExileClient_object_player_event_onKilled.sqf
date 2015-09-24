@@ -49,11 +49,6 @@ _code = {
 				};
 			} forEach _x;
 		} forEach _weaponsItemsCargo;
-		
-		clearBackpackCargoGlobal _nObject;
-		clearItemCargoGlobal _nObject;
-		clearMagazineCargoGlobal _nObject;
-		clearWeaponCargoGlobal _nObject;
 		deleteVehicle _nObject;
 	};
 };
