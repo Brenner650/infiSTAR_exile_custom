@@ -1,4 +1,0 @@
-//new
-7 "" !="exilexm8isonline" !="bis_fnc_selectrespawntemplate_respawned" !="holder_in_use"
-7 "ExileScore"
-7 "ExileMoney"
